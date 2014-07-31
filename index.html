@@ -18,7 +18,7 @@
 	</div>
 	
 	<div data-role="content">
-		<input type="file" name="myPic" id="picture" capture="image/*"></input>
+		<input type="text" name="myPic" id="picture"></input>
 	</div>
 	
 	<div data-role="footer">
@@ -28,7 +28,11 @@
 <script>
 $(document).ready(function() {
 	$('#picture').on('click', function(e){
-		navigator.camera.getPicture(onSuccess, onFail, 
+		makePic();
+	});
+	
+	function makePic(){
+	navigator.camera.getPicture(onSuccess, onFail, 
 				{
 					quality:40,
 					destinationType: Camera.DestinationTpe.FILE_URI,
@@ -36,7 +40,15 @@ $(document).ready(function() {
 					targetHeight: 400
 				}
 			);
-	});
+	}
+	
+	function onSuccess(imagedata){
+		alert("got it");
+	}
+	
+	function onFail(message){
+		alert("failed");
+	}
 });
 </script>
 </body>
