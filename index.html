@@ -9,10 +9,9 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <script type="text/javascript" charset="UTF-8" src="cordova.js"></script>
-<script type="text/javascript" src="phonegap.js"></script>
-
+<script type="text/javascript" src="phonegap.js" charset="utf-8"></script>
 </head>
-<body onload="init()">
+<body>
 <div data-role="page">
 	<div data-role="header">
 		<h1>Eggenberg 11</h1>
@@ -20,7 +19,7 @@
 	
 	<div data-role="content">
 		<!--<input type="text" name="myPic" id="picture"></input>-->
-		<button class="ui-button ui-mini" onclick="makePic();">Testcamera</button>
+		<button class="camera-control" onclick="capturePhoto();">Testcamera</button>
 	</div>
 	
 	<div data-role="footer">
@@ -28,21 +27,50 @@
 	</div>
 </div>
 <script>	
-function makePic(){
-navigator.camera.getPicture(onSuccess, onFail, 
-			{
-				quality:40
-			}
-		);
+function capturePhoto(){
+    navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60});
 }
 
-function onSuccess(imagedata){
-	alert("got it");
-}
+function uploadPhoto(data){
+    // this is where you would send the image file to server
+    //output image to screen
+        cameraPic.src = "data:image/jpeg;base64," + data;
+    }
+	
+navigator.notification.alert(message, alertCallback, [title], [buttonName]);
 
-function onFail(message){
-	alert("failed");
-}
+navigator.notification.alert(
+        'Your Photo has been uploaded', // message
+        okay,                           // callback
+        'Photo Uploaded',               // title
+        'OK'                            // buttonName
+    );
+
+function uploadPhoto(data){
+    // this is where you would send the image file to server
+        cameraPic.src = "data:image/jpeg;base64," + data;
+        // Successful upload to the server
+        navigator.notification.alert(
+            'Your Photo has been uploaded',  // message
+            okay,                           // callback
+            'Photo Uploaded',              // title
+            'OK'                          // buttonName
+        );
+        // upload has failed Fail
+        /*
+        if (failedToUpload){
+        navigator.notification.alert(
+            'Your Photo has failed to upload',
+            failedDismissed,
+            'Photo Not Uploaded',
+            'OK'
+            );
+        }
+        */
+    }
+    function okay(){
+        alert("Thanks for your photo ;)");
+    }	
 </script>
 </body>
 </html>
