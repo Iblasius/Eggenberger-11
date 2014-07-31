@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <script type="text/javascript" charset="UTF-8" src="cordova.js"></script>
-<script type="text/javascript" charset="UTF-8" src="phonegap.js"></script>
+<script type="text/javascript" src="phonegap.js"></script>
 
 </head>
 <body onload="init()">
@@ -20,38 +20,29 @@
 	
 	<div data-role="content">
 		<!--<input type="text" name="myPic" id="picture"></input>-->
-		<button class="ui-button ui-mini" id="picture">Testcamera</button>
+		<button class="ui-button ui-mini" onclick="makePic();>Testcamera</button>
 	</div>
 	
 	<div data-role="footer">
 		<h1>Copyright</h1>
 	</div>
 </div>
-<script>
-$(document).ready(function() {
-	$('#picture').on('click', function(e){
-		makePic();
-	});
-	
-	function makePic(){
-	navigator.camera.getPicture(onSuccess, onFail, 
-				{
-					quality:40,
-					destinationType: Camera.DestinationTpe.FILE_URI,
-					targetWidth: 400,
-					targetHeight: 400
-				}
-			);
-	}
-	
-	function onSuccess(imagedata){
-		alert("got it");
-	}
-	
-	function onFail(message){
-		alert("failed");
-	}
-});
+<script>	
+function makePic(){
+navigator.camera.getPicture(onSuccess, onFail, 
+			{
+				quality:40
+			}
+		);
+}
+
+function onSuccess(imagedata){
+	alert("got it");
+}
+
+function onFail(message){
+	alert("failed");
+}
 </script>
 </body>
 </html>
