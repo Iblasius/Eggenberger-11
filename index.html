@@ -18,7 +18,7 @@
 	</div>
 	
 	<div data-role="content">
-		
+		<input type="file" name="myPic" id="picture" capture="image/*"></input>
 	</div>
 	
 	<div data-role="footer">
@@ -27,6 +27,16 @@
 </div>
 <script>
 $(document).ready(function() {
+	$('#picture').on('click', function(e){
+		navigator.camera.getPicture(onSuccess, onFail, 
+				{
+					quality:40,
+					destinationType: Camera.DestinationTpe.FILE_URI,
+					targetWidth: 400,
+					targetHeight: 400
+				}
+			);
+	});
 });
 </script>
 </body>
