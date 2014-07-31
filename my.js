@@ -12,6 +12,11 @@ function DOMLoaded(){
 	document.addEventListener("deviceready", phonegapLoaded, false);
 }
 
+// alert dialog dismissed
+    function alertDismissed() {
+        // do something
+    }
+
 function phonegapLoaded(){
 	
 	//$(function() {
@@ -19,7 +24,9 @@ function phonegapLoaded(){
 	//	$("body").append("<h1>DEVICE is ready!</h1>");
 	//});
 	navigator.notification.alert(
-		'Hello World',
-		dismissed,
+    'You are the winner!',  // message
+    alertDismissed,         // callback
+    'Game Over',            // title
+    'Done'                  // buttonName
 	);
 }
